@@ -1,0 +1,56 @@
+<?php
+
+declare(strict_types=1);
+/**
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://doc.hyperf.io
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
+ */
+
+namespace App\Controller;
+
+use App\Model\Member;
+use App\Model\Model;
+use Hyperf\Di\Annotation\Inject;
+use Psr\Container\ContainerInterface;
+use Psr\EventDispatcher\EventDispatcherInterface;
+use App\Event\UserRegistered;
+use Hyperf\Cache\Annotation\Cacheable;
+
+
+class IndexController extends AbstractController
+{
+    /**
+     * @return int
+     * @Inject
+     * @var EventDispatcherInterface
+     */
+    private $eventDispatcher;
+
+
+    public function index(ContainerInterface $container)
+    {
+
+        $cache = $container->get(\Psr\SimpleCache\CacheInterface::class);
+
+        $cache->set('王磊', 'asdasd');
+        var_dump($cache->get('王磊'));
+        return 1;
+        //这里就是触发  向事件抛出数据
+//        $this->eventDispatcher->dispatch(new UserRegistered(array(
+//            'id' => 1
+//        )));
+//        $memberData = Member::query()->where(array('id' => 1))->first();
+//        return $memberData;
+    }
+
+    public function task(ContainerInterface $container)
+    {
+        $cache = $container->get(\Psr\SimpleCache\CacheInterface::class);
+        var_dump($cache->get('王磊'));
+        return 'task';
+    }
+}
