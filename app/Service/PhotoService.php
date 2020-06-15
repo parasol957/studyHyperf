@@ -32,7 +32,6 @@ class PhotoService
             $photoData = $this->client->get($photoUrl);
             if ($photoData->getStatusCode() == 200) {  //表示请求成功
                 $path = BASE_PATH . "/runtime/photo/" . uniqid() . '.png';
-//            var_dump($path);
                 $fp = fopen($path, "a+");
                 fwrite($fp, $photoData->getBody()->getContents());
                 fclose($fp);
