@@ -25,18 +25,23 @@ use Swoole\Timer;
 use Hyperf\Guzzle\HandlerStackFactory;
 use GuzzleHttp\Client;
 use Hyperf\Utils\Parallel;
+use Hyperf\HttpServer\Contract\RequestInterface;
 
 class IndexController extends AbstractController
 {
 
 
-    public function index(ContainerInterface $container)
+    public function index(RequestInterface $request)
     {
-        echo BASE_PATH;
-//        $photoService = make(PhotoService::class, array());
-//        $photoService->downPhoto();
 
-//        return $this->photoService->downPhoto();
+        $photoURL = $request->input('photoURL');
+        if (empty($photoURL)) {
+            return 1;
+        }
+        $photoService = make(PhotoService::class, array('photoURL' => $photoURL));
+        $photoService->downPhoto();
+        $photoService->downSwoolePhoto();
+        $photoService->fileGet();
     }
 
     public function getTime($id, $task)
