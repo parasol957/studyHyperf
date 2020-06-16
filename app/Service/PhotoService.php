@@ -49,6 +49,9 @@ class PhotoService
         echo 'Guzzle: ' . $time2 . PHP_EOL;
     }
 
+    /**
+     * 使用swoole下载图片
+     */
     public function downSwoolePhoto()
     {
         $time1 = microtime(true);
@@ -69,6 +72,9 @@ class PhotoService
         echo 'Swoole: ' . $time2 . PHP_EOL;
     }
 
+    /**
+     * 测试使用file_get_contents,file_put_contents
+     */
     public function fileGet()
     {
         $time1 = microtime(true);

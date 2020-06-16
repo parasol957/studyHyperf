@@ -30,7 +30,11 @@ use Hyperf\HttpServer\Contract\RequestInterface;
 class IndexController extends AbstractController
 {
 
-
+    /**
+     * @param RequestInterface $request
+     * @return int
+     * 下载图片
+     */
     public function index(RequestInterface $request)
     {
 
@@ -44,13 +48,6 @@ class IndexController extends AbstractController
         $photoService->fileGet();
     }
 
-    public function getTime($id, $task)
-    {
-//        var_dump($id);
-//        var_dump($task);
-//        echo date('Y-m-d H:i:s') . PHP_EOL;
-
-    }
 
 
 }
